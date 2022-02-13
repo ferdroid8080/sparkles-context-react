@@ -1,6 +1,10 @@
 import * as actions from '../actions/types';
 
-const generalReducer = (state = {}, action) => {
+const initialState = {
+	sparkles: 0,
+};
+
+const generalReducer = (state = initialState, action) => {
 	if (action.type === actions.ADD_SPARKLE) {
 		return {
 			...state,
