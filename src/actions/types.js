@@ -1,0 +1,2 @@
+export const ADD_SPARKLE = 'ADD_SPARKLE';
+export const REMOVE_SPARKLE = 'REMOVE_SPARKLE';
