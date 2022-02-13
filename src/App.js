@@ -1,20 +1,18 @@
-import { useContext } from 'react';
+// import { useContext } from 'react';
 import * as actions from './actions/types';
-import { GeneralContext } from './context/generalContext';
+// import { GeneralContext } from './context/generalContext';
+import { connect } from 'react-redux';
+import Sparkles from './componets/Sparkles';
 
-export const Sparkles = () => {
-	const { state } = useContext(GeneralContext);
-	const counter = state.sparkles;
-	const sparklesArray = Array(counter).fill('✨');
-	console.log('Render Sparkles....');
-	return <p className='Sparkles'>{sparklesArray.join(' ')}</p>;
-};
-
-function App() {
-	const { dispatch } = useContext(GeneralContext);
+function App(props) {
+	// const { dispatch } = useContext(GeneralContext);
 
 	const handleOnClick = (type) => {
-		dispatch({ type });
+		if (type === 'ADD_SPARKLE') {
+			props.onAddSparkle();
+		} else if (type === 'REMOVE_SPARKLE') {
+			props.onRemoveSparkle();
+		}
 	};
 
 	return (
@@ -38,4 +36,9 @@ function App() {
 	);
 }
 
-export default App;
+const mapDispatchToProps = (dispatch) => ({
+	onAddSparkle: () => dispatch({ type: actions.ADD_SPARKLE }),
+	onRemoveSparkle: () => dispatch({ type: actions.REMOVE_SPARKLE }),
+});
+
+export default connect(null, mapDispatchToProps)(App);
